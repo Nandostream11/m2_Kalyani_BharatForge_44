@@ -11,7 +11,7 @@ git clone https://github.com/username/autonomous_navigation_pkg.git.<br>
 cd autonomous_navigation_pkg
 rosdep install --from-paths src --ignore-src -r -y
 colcon build --packages-select autonomous_navigation_pkg
-source install/setup.bash``<br>
+source install/setup.bash
 ```
 ##Usage
 
