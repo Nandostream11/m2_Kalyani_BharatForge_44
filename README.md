@@ -39,7 +39,4 @@ Path planning and obstacle avoidance
 
 Integration with RViz for visualization
 
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request.
 
