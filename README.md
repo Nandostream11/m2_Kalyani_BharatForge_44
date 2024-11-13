@@ -7,9 +7,9 @@ A ROS2-based package for autonomous robot navigation. This package utilizes the 
 ##Installation
 
 git clone https://github.com/username/autonomous_navigation_pkg.git
-``cd autonomous_navigation_pkg``
-``rosdep install --from-paths src --ignore-src -r -y``
-``colcon build --packages-select autonomous_navigation_pkg``
+``cd autonomous_navigation_pkg``\\
+``rosdep install --from-paths src --ignore-src -r -y``\\
+``colcon build --packages-select autonomous_navigation_pkg``\\
 ``source install/setup.bash``
 ##Usage
 
