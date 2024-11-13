@@ -7,21 +7,27 @@ A ROS2-based package for autonomous robot navigation. This package utilizes the 
 ##Installation
 
 git clone https://github.com/username/autonomous_navigation_pkg.git.<br>
-``cd autonomous_navigation_pkg``<br>
-``rosdep install --from-paths src --ignore-src -r -y``<br>
-``colcon build --packages-select autonomous_navigation_pkg``<br>
-``source install/setup.bash``<br>
+```bash 
+cd autonomous_navigation_pkg
+rosdep install --from-paths src --ignore-src -r -y
+colcon build --packages-select autonomous_navigation_pkg
+source install/setup.bash``<br>
+```
 ##Usage
 
 Map Generation
 
 ## Launch SLAM for map generation
-``ros2 launch autonomous_navigation_pkg slam_launch.py``
+```bash
+ros2 launch autonomous_navigation_pkg slam_launch.py
+```
 
 Autonomous Navigation
 
 ## Run the navigation stack with a pre-existing map
-``ros2 launch autonomous_navigation_pkg nav_launch.py map:=/path/to/map.yaml``
+```bash
+ros2 launch autonomous_navigation_pkg nav_launch.py map:=/path/to/map.yaml
+```
 
 ##Features
 
