@@ -8,9 +8,9 @@ A ROS2-based package for autonomous robot navigation. This package utilizes the 
 
 git clone https://github.com/username/autonomous_navigation_pkg.git.<br>
 ```bash 
-cd autonomous_navigation_pkg
+cd superbot_descrioption
 rosdep install --from-paths src --ignore-src -r -y
-colcon build --packages-select autonomous_navigation_pkg
+colcon build --packages-select superbot_description
 source install/setup.bash
 ```
 ##Usage
@@ -19,14 +19,14 @@ Map Generation
 
 ## Launch SLAM for map generation
 ```bash
-ros2 launch autonomous_navigation_pkg slam_launch.py
+ros2 launch superbot_description sim_launch.py
 ```
 
 Autonomous Navigation
 
 ## Run the navigation stack with a pre-existing map
 ```bash
-ros2 launch autonomous_navigation_pkg nav_launch.py map:=/path/to/map.yaml
+ros2 launch superbot_description nav_launch.py
 ```
 
 ##Features
