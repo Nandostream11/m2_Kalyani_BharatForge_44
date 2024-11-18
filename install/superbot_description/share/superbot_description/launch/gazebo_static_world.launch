@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<launch>
+    <node pkg="gazebo_ros" type="gazebo" name="gazebo">
+      <param name="world_file" value="$(find superbot_description)/worlds/superbot_static_env.world"/>
+    </node>
+  </launch>

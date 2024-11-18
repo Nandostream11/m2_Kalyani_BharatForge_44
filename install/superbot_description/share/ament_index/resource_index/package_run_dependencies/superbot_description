@@ -1,1 +1,1 @@
-ament_lint_auto;ament_lint_common
+gazebo_ros;ament_cmake;ament_lint_auto;ament_lint_common

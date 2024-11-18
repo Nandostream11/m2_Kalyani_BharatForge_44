@@ -1,0 +1,4 @@
+Invoking command in '/home/parth/Superbot_ws/build/superbot_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/parth/Superbot_ws/build/superbot_description -- -j4 -l4
+Invoked command in '/home/parth/Superbot_ws/build/superbot_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --build /home/parth/Superbot_ws/build/superbot_description -- -j4 -l4
+Invoking command in '/home/parth/Superbot_ws/build/superbot_description': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/parth/Superbot_ws/build/superbot_description
+Invoked command in '/home/parth/Superbot_ws/build/superbot_description' returned '0': CMAKE_PREFIX_PATH=/opt/ros/humble /usr/bin/cmake --install /home/parth/Superbot_ws/build/superbot_description
