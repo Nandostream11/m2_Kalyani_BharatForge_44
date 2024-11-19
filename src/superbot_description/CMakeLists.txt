@@ -15,6 +15,11 @@ install(
   DESTINATION share/${PROJECT_NAME}
 )
 
+install(
+  DIRECTORY URDF
+  DESTINATION share/${PROJECT_NAME}
+)
+
 # Install world files
 install(
   DIRECTORY worlds

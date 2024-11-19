@@ -1,5 +1,7 @@
-/home/parth/Superbot_ws/install/superbot_description/share/superbot_description/launch/gazebo_static_world.launch.py
-/home/parth/Superbot_ws/install/superbot_description/share/superbot_description/launch/__pycache__/superbot.launch.cpython-310.pyc
+/home/parth/Superbot_ws/install/superbot_description/share/superbot_description/launch/gazebo_static.launch.py
+/home/parth/Superbot_ws/install/superbot_description/share/superbot_description/URDF/superbot.sdf
+/home/parth/Superbot_ws/install/superbot_description/share/superbot_description/URDF/superbot.urdf
+/home/parth/Superbot_ws/install/superbot_description/share/superbot_description/URDF/superbot.urdf.xacro
 /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/worlds/superbot_env.world
 /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/worlds/safe_world.world
 /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/worlds/warehouse.world
