@@ -11,9 +11,6 @@ def generate_launch_description():
     robotXacroName='superbot'
     namePackage='superbot_description'
 
-    modelFileRelativePath='src/superbot_description/URDF/superbot.urdf.xacro'
-    worldFileRelativePath='src/superbot_description/worlds/superbot_static_env.world'
-
     pathModelFile = os.path.join(get_package_share_directory('superbot_description'), 'URDF', 'superbot.urdf.xacro')
     pathWorldFile = os.path.join(get_package_share_directory('superbot_description'), 'worlds', 'superbot_static_env.world')
 
@@ -26,10 +23,17 @@ def generate_launch_description():
 
     nodeRobotStatePublisher=Node(package='robot_state_publisher', executable='robot_state_publisher', output='screen', parameters=[{'robot_description': robotDescription, 'use_sim_time': True}])
 
+    slamNode=Node(package='slam_toolbox', executable='async_slam_toolbox_node', name='slam_toolbox', output='screen', parameters=[{'use_sim_time': True}])
+
+    rvizConfigPath=os.path.join(get_package_share_directory(namePackage), 'rviz', 'mapping_config.rviz')
+    rvizNode=Node(package='rviz2', executable='rviz2', arguments=['=d', rvizConfigPath], output='screen')
+    
     launchDescriptionObject=LaunchDescription()
 
     launchDescriptionObject.add_action(gazeboLaunch)
     launchDescriptionObject.add_action(spwanModelNode)
     launchDescriptionObject.add_action(nodeRobotStatePublisher)
+    launchDescriptionObject.add_action(slamNode)
+    launchDescriptionObject.add_action(rvizNode)
 
     return launchDescriptionObject
