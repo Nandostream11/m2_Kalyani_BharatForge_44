@@ -14,7 +14,7 @@ def generate_launch_description():
     # Paths for required files
     package_share_directory = get_package_share_directory(package_name)
     path_model_file = os.path.join(package_share_directory, 'URDF', 'superbot.urdf.xacro')
-    path_world_file = os.path.join(package_share_directory, 'worlds', 'superbot_static_env.world')
+    path_world_file = os.path.join(package_share_directory, 'worlds', 'superbot_env.world')
     rviz_config_path = os.path.join(package_share_directory, 'rviz', 'mapping_config.rviz')
     slam_config_path = os.path.join(package_share_directory, 'config', 'slam_config.yaml')
 

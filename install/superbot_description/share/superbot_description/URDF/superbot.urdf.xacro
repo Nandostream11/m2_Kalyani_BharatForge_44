@@ -2,20 +2,19 @@
 
 <robot name="superbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+    <!-- Materials -->
     <material name="red">
         <color rgba="1.0 0.0 0.0 1.0"/>
     </material>
-
     <material name="green">
         <color rgba="0 0.6 0 1"/>
     </material>
-
     <material name="white">
         <color rgba="1 1 1 1"/>
     </material>
 
+    <!-- Base Links -->
     <link name="base_footprint"/>
-
     <link name="base_link">
         <inertial>
             <origin xyz="0 0 0.1" rpy="0 0 0"/>
@@ -37,6 +36,7 @@
         </collision>
     </link>
 
+    <!-- Lidar -->
     <link name="lidar">
         <inertial>
             <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -58,6 +58,7 @@
         </collision>
     </link>
 
+    <!-- Gazebo Lidar Plugin -->
     <gazebo reference="lidar">
         <sensor type="ray" name="laser">
             <pose>0 0 0 0 0 0</pose>
@@ -90,6 +91,7 @@
         </sensor>
     </gazebo>
 
+    <!-- Wheels -->
     <xacro:macro name="wheel_link" params="prefix">
         <link name="${prefix}_wheel">
             <inertial>
@@ -113,10 +115,11 @@
         </link>
     </xacro:macro>
 
+    <!-- Instantiate Wheels -->
     <xacro:wheel_link prefix="left"/>
-
     <xacro:wheel_link prefix="right"/>
 
+    <!-- Caster Wheel -->
     <link name="caster_wheel">
         <inertial>
             <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -138,6 +141,7 @@
         </collision>
     </link>
 
+    <!-- Joints -->
     <joint name="base_joint" type="fixed">
         <parent link="base_footprint"/>
         <child link="base_link"/>

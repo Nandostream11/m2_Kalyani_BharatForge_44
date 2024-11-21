@@ -7,18 +7,22 @@ import xacro
 import os
 
 def generate_launch_description():
-
     # Robot and package information
     robot_xacro_name = 'superbot'
     package_name = 'superbot_description'
 
-    # File paths
-    path_model_file = os.path.join(get_package_share_directory(package_name), 'URDF', 'superbot.urdf')
-    path_world_file = os.path.join(get_package_share_directory(package_name), 'worlds', 'superbot_static_env.world')
-    rviz_config_path = os.path.join(get_package_share_directory(package_name), 'rviz', 'mapping_config.rviz')
+    # Paths for required files
+    package_share_directory = get_package_share_directory(package_name)
+    path_model_file = os.path.join(package_share_directory, 'URDF', 'superbot.urdf.xacro')
+    path_world_file = os.path.join(package_share_directory, 'worlds', 'superbot_static_env.world')
+    rviz_config_path = os.path.join(package_share_directory, 'rviz', 'mapping_config.rviz')
+    slam_config_path = os.path.join(package_share_directory, 'config', 'slam_config.yaml')
 
     # Generate robot description from xacro
-    robot_description = xacro.process_file(path_model_file).toxml()
+    try:
+        robot_description = xacro.process_file(path_model_file).toxml()
+    except Exception as e:
+        raise RuntimeError(f"Error processing xacro file at {path_model_file}: {e}")
 
     # Include Gazebo launch
     gazebo_ros_package_launch = PythonLaunchDescriptionSource(
@@ -26,37 +30,43 @@ def generate_launch_description():
     )
     gazebo_launch = IncludeLaunchDescription(
         gazebo_ros_package_launch,
-        launch_arguments={'world': path_world_file, 'use_sim_time': 'true'}.items()
+        launch_arguments={
+            'world': path_world_file,
+            'use_sim_time': 'true'
+        }.items()
     )
 
-    # Spawn model node
+    # Spawn model in Gazebo
     spawn_model_node = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
-        arguments=['-topic', 'robot_description', '-entity', robot_xacro_name],
+        arguments=[
+            '-topic', 'robot_description',
+            '-entity', robot_xacro_name
+        ],
         output='screen'
     )
 
-    # Robot state publisher node
+    # Robot state publisher for TF and URDF
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
         output='screen',
-        parameters=[{'robot_description': robot_description, 'use_sim_time': True}]
+        parameters=[
+            {'robot_description': robot_description, 'use_sim_time': True}
+        ]
     )
 
-    # SLAM node
+    # SLAM node for mapping
     slam_node = Node(
-    package='slam_toolbox',
-    executable='async_slam_toolbox_node',
-    name='slam_toolbox',
-    output='screen',
-    parameters=[
-        os.path.join(get_package_share_directory('superbot_description'), 'config', 'slam_config.yaml')
-    ]
-)
+        package='slam_toolbox',
+        executable='async_slam_toolbox_node',
+        name='slam_toolbox',
+        output='screen',
+        parameters=[slam_config_path]
+    )
 
-    # RViz node
+    # RViz node for visualization
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
@@ -64,7 +74,7 @@ def generate_launch_description():
         output='screen'
     )
 
-    # Create and return launch description
+    # Combine and return the launch description
     launch_description_object = LaunchDescription()
     launch_description_object.add_action(gazebo_launch)
     launch_description_object.add_action(spawn_model_node)
