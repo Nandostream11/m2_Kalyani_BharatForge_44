@@ -3,26 +3,26 @@ from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
-import xacro
 import os
 
 def generate_launch_description():
     # Robot and package information
-    robot_xacro_name = 'superbot'
+    robot_name = 'superbot'
     package_name = 'superbot_description'
 
     # Paths for required files
     package_share_directory = get_package_share_directory(package_name)
-    path_model_file = os.path.join(package_share_directory, 'URDF', 'superbot.urdf.xacro')
+    path_model_file = os.path.join(package_share_directory, 'URDF', 'superbot.urdf')
     path_world_file = os.path.join(package_share_directory, 'worlds', 'superbot_static_env.world')
     rviz_config_path = os.path.join(package_share_directory, 'rviz', 'mapping_config.rviz')
     slam_config_path = os.path.join(package_share_directory, 'config', 'slam_config.yaml')
 
-    # Generate robot description from xacro
+    # Read the URDF file directly
     try:
-        robot_description = xacro.process_file(path_model_file).toxml()
+        with open(path_model_file, 'r') as urdf_file:
+            robot_description = urdf_file.read()
     except Exception as e:
-        raise RuntimeError(f"Error processing xacro file at {path_model_file}: {e}")
+        raise RuntimeError(f"Error reading URDF file at {path_model_file}: {e}")
 
     # Include Gazebo launch
     gazebo_ros_package_launch = PythonLaunchDescriptionSource(
@@ -42,7 +42,7 @@ def generate_launch_description():
         executable='spawn_entity.py',
         arguments=[
             '-topic', 'robot_description',
-            '-entity', robot_xacro_name
+            '-entity', robot_name
         ],
         output='screen'
     )
@@ -52,9 +52,7 @@ def generate_launch_description():
         package='robot_state_publisher',
         executable='robot_state_publisher',
         output='screen',
-        parameters=[
-            {'robot_description': robot_description, 'use_sim_time': True}
-        ]
+        parameters=[{'robot_description': robot_description, 'use_sim_time': True}]
     )
 
     # SLAM node for mapping
