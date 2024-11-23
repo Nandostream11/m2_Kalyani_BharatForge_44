@@ -91,6 +91,8 @@
 /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/worlds/warehouse.world
 /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/worlds/superbot_static_env.world
 /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/rviz/navigation.rviz
+/home/parth/Superbot_ws/install/superbot_description/share/superbot_description/config/nav2_params.yaml
+/home/parth/Superbot_ws/install/superbot_description/share/superbot_description/config/slam_config.yaml
 /home/parth/Superbot_ws/install/superbot_description/share/ament_index/resource_index/package_run_dependencies/superbot_description
 /home/parth/Superbot_ws/install/superbot_description/share/ament_index/resource_index/parent_prefix_path/superbot_description
 /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/environment/ament_prefix_path.sh

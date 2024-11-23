@@ -15,39 +15,44 @@ def generate_launch_description():
     path_model_file = os.path.join(package_share_directory, 'URDF', 'superbot.urdf')
     path_world_file = os.path.join(package_share_directory, 'worlds', 'superbot_env.world')
     nav2_params_path = os.path.join(package_share_directory, 'config', 'nav2_params.yaml')
+    rviz_config_path = os.path.join(package_share_directory, 'rviz', 'navigation.rviz')
     
     # Read the URDF file
     with open(path_model_file, 'r') as urdf_file:
         robot_description = urdf_file.read()
 
-    # Include Gazebo
+    # Include Gazebo launch file
     gazebo_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
+        PythonLaunchDescriptionSource(
             os.path.join(get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')
-        ]),
+        ),
         launch_arguments={
             'world': path_world_file,
             'use_sim_time': 'true'
         }.items()
     )
 
-    # Nodes
+    # Joint State Publisher Node
     joint_state_publisher_node = Node(
         package='joint_state_publisher',
         executable='joint_state_publisher',
         name='joint_state_publisher',
-        parameters=[{'robot_description': robot_description}]
+        parameters=[{'robot_description': robot_description}],
+        output='screen'
     )
 
+    # Robot State Publisher Node
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
         parameters=[{
             'robot_description': robot_description,
             'use_sim_time': True
-        }]
+        }],
+        output='screen'
     )
 
+    # Spawn Robot Entity Node in Gazebo
     spawn_entity_node = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
@@ -56,7 +61,7 @@ def generate_launch_description():
         output='screen'
     )
 
-    # SLAM node
+    # SLAM Node
     slam_node = Node(
         package='slam_toolbox',
         executable='async_slam_toolbox_node',
@@ -70,23 +75,23 @@ def generate_launch_description():
         output='screen'
     )
 
-    # Nav2
+    # Navigation Stack (Nav2) Node
     nav2_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([
+        PythonLaunchDescriptionSource(
             os.path.join(get_package_share_directory('nav2_bringup'), 'launch', 'navigation_launch.py')
-        ]),
+        ),
         launch_arguments={
             'use_sim_time': 'true',
             'params_file': nav2_params_path
         }.items()
     )
 
-    # RViz
+    # RViz Node for Visualization
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
         name='rviz2',
-        arguments=['-d', os.path.join(package_share_directory, 'rviz', 'navigation.rviz')],
+        arguments=['-d', rviz_config_path],
         parameters=[{'use_sim_time': True}],
         output='screen'
     )
