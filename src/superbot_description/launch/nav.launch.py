@@ -1,6 +1,6 @@
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription, TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 import os
@@ -14,12 +14,12 @@ def generate_launch_description():
     package_share_directory = get_package_share_directory(package_name)
     path_model_file = os.path.join(package_share_directory, 'URDF', 'superbot.urdf')
     path_world_file = os.path.join(package_share_directory, 'worlds', 'superbot_env.world')
-    nav2_params_path = os.path.join(package_share_directory, 'config', 'nav2_params.yaml')
     rviz_config_path = os.path.join(package_share_directory, 'rviz', 'navigation.rviz')
     
     # Read the URDF file
     with open(path_model_file, 'r') as urdf_file:
         robot_description = urdf_file.read()
+        print('1')
 
     # Include Gazebo launch file
     gazebo_launch = IncludeLaunchDescription(
@@ -32,33 +32,25 @@ def generate_launch_description():
         }.items()
     )
 
-    # Joint State Publisher Node
-    joint_state_publisher_node = Node(
-        package='joint_state_publisher',
-        executable='joint_state_publisher',
-        name='joint_state_publisher',
-        parameters=[{'robot_description': robot_description}],
-        output='screen'
-    )
-
     # Robot State Publisher Node
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
-        parameters=[{
-            'robot_description': robot_description,
-            'use_sim_time': True
-        }],
+        parameters=[{'robot_description': open(path_model_file, 'r').read()}],
         output='screen'
     )
 
     # Spawn Robot Entity Node in Gazebo
-    spawn_entity_node = Node(
-        package='gazebo_ros',
-        executable='spawn_entity.py',
-        arguments=['-topic', '/robot_description',
-                  '-entity', robot_name],
-        output='screen'
+    spawn_entity_node = TimerAction(
+        period=3.0,  # Wait for 3 seconds to ensure robot_state_publisher is ready
+        actions=[
+            Node(
+                package='gazebo_ros',
+                executable='spawn_entity.py',
+                arguments=['-topic', '/robot_description', '-entity', robot_name],
+                output='screen'
+            )
+        ]
     )
 
     # SLAM Node
@@ -67,26 +59,19 @@ def generate_launch_description():
         executable='async_slam_toolbox_node',
         name='slam_toolbox',
         parameters=[{
-            'use_sim_time': True,
-            'base_frame': 'base_footprint',
-            'odom_frame': 'odom',
-            'map_frame': 'map'
+            'use_sim_time': True,       # Use simulation time from Gazebo
+            'base_frame': 'base_footprint',  # Base frame of the robot
+            'odom_frame': 'odom',      # Odom frame from your robot
+            'map_frame': 'map',        # Map frame used by SLAM Toolbox
+            'resolution': 0.05,        # Map resolution in meters/pixel
+            'max_laser_range': 10.0,   # Maximum range of the lidar
+            'minimum_time_between_update': 0.2  # Min update interval
         }],
         output='screen'
     )
 
-    # Navigation Stack (Nav2) Node
-    nav2_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(get_package_share_directory('nav2_bringup'), 'launch', 'navigation_launch.py')
-        ),
-        launch_arguments={
-            'use_sim_time': 'true',
-            'params_file': nav2_params_path
-        }.items()
-    )
 
-    # RViz Node for Visualization
+    # RViz Node
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
@@ -96,12 +81,11 @@ def generate_launch_description():
         output='screen'
     )
 
+
     return LaunchDescription([
         gazebo_launch,
-        joint_state_publisher_node,
         robot_state_publisher_node,
         spawn_entity_node,
         slam_node,
-        nav2_launch,
         rviz_node
     ])

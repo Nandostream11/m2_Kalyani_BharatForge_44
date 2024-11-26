@@ -57,6 +57,7 @@
         </collision>
     </link>
 
+    <!-- Left Wheel -->
     <link name="left_wheel">
         <inertial>
             <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -67,17 +68,18 @@
             <geometry>
                 <cylinder radius="0.1" length="0.05"/>
             </geometry>
-            <origin xyz="0 0 0" rpy="1.57 0 0"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
             <material name="white"/>
         </visual>
         <collision>
             <geometry>
                 <cylinder radius="0.1" length="0.05"/>
             </geometry>
-            <origin xyz="0 0 0" rpy="1.57 0 0"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
         </collision>
     </link>
 
+    <!-- Right Wheel -->
     <link name="right_wheel">
         <inertial>
             <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -88,17 +90,18 @@
             <geometry>
                 <cylinder radius="0.1" length="0.05"/>
             </geometry>
-            <origin xyz="0 0 0" rpy="1.57 0 0"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
             <material name="white"/>
         </visual>
         <collision>
             <geometry>
                 <cylinder radius="0.1" length="0.05"/>
             </geometry>
-            <origin xyz="0 0 0" rpy="1.57 0 0"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
         </collision>
     </link>
 
+    <!-- Caster Wheel -->
     <link name="caster_wheel">
         <inertial>
             <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -136,14 +139,14 @@
     <joint name="base_left_wheel_joint" type="continuous">
         <parent link="base_link"/>
         <child link="left_wheel"/>
-        <origin xyz="-0.15 0.225 0" rpy="0 0 0"/>
+        <origin xyz="-0.3 0.225 0" rpy="0 0 0"/>
         <axis xyz="0 1 0"/>
     </joint>
 
     <joint name="base_right_wheel_joint" type="continuous">
         <parent link="base_link"/>
         <child link="right_wheel"/>
-        <origin xyz="-0.15 -0.225 0" rpy="0 0 0"/>
+        <origin xyz="-0.3 -0.225 0" rpy="0 0 0"/>
         <axis xyz="0 1 0"/>
     </joint>
 
@@ -156,16 +159,19 @@
     <!-- Plugins -->
     <plugin name="diff_drive_controller" filename="libgazebo_ros_diff_drive.so">
         <ros>
+            <namespace>/</namespace>
             <remapping>cmd_vel:=/cmd_vel</remapping>
             <remapping>odom:=/odom</remapping>
         </ros>
         <update_rate>50</update_rate>
+        <publish_odometry>true</publish_odometry>
+        <publish_odometry_tf>true</publish_odometry_tf>
+        <odometry_frame>odom</odometry_frame>
+        <robot_base_frame>base_footprint</robot_base_frame>
         <wheel_separation>0.45</wheel_separation>
         <wheel_radius>0.1</wheel_radius>
         <left_joint>base_left_wheel_joint</left_joint>
         <right_joint>base_right_wheel_joint</right_joint>
-        <odometry_publisher>true</odometry_publisher>
-        <publish_odometry_tf>true</publish_odometry_tf>
     </plugin>
 
     <gazebo reference="lidar">
@@ -187,11 +193,6 @@
                     <max>15.0</max>
                     <resolution>0.015</resolution>
                 </range>
-                <noise>
-                    <type>gaussian</type>
-                    <mean>0.0</mean>
-                    <stddev>0.01</stddev>
-                </noise>
             </ray>
             <plugin name="scan" filename="libgazebo_ros_ray_sensor.so">
                 <ros>
@@ -202,4 +203,5 @@
             </plugin>
         </sensor>
     </gazebo>
+    
 </robot>

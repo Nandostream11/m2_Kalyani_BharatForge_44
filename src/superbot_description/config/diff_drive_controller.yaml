@@ -1,0 +1,27 @@
+---
+controller_manager:
+  ros__parameters:
+    update_rate: 50
+    wheel_separation: 0.45
+    wheel_radius: 0.1
+
+    diff_drive_controller:
+      type: diff_drive_controller/DiffDriveController
+      use_stamped_vel: false
+      publish_limited_velocity: true
+      velocity_rolling_window_size: 2
+      enable_odom_tf: true
+      odom_frame_id: odom
+      base_frame_id: base_link
+      publish_rate: 50.0
+      cmd_vel_timeout: 0.25
+      allow_multiple_cmd_vel_publishers: true
+
+      left_wheel_names:
+        - base_left_wheel_joint
+      right_wheel_names:
+        - base_right_wheel_joint
+
+      command_interface: ["velocity"]
+      state_interface: ["velocity"]
+      enable_velocity_joint_limiter: true

@@ -1,0 +1,242 @@
+[0.033s] Invoking command in '/home/parth/Superbot_ws/build/superbot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/parth/Superbot_ws/build/superbot_description -- -j4 -l4
+[0.251s] -- Found ament_cmake: 1.3.10 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.436s] -- Found gazebo_ros: 3.7.0 (/opt/ros/humble/share/gazebo_ros/cmake)
+[0.523s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.531s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.546s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.567s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.592s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.676s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.689s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.828s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.006s] -- Found DART: /usr/include (Required is at least version "6.6") found components: dart 
+[1.065s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found version "3.12.4") 
+[1.070s] -- Looking for ignition-math6 -- found version 6.15.1
+[1.084s] -- Searching for dependencies of ignition-math6
+[1.089s] -- Looking for OGRE...
+[1.105s] -- Found Ogre Ghadamon (1.9.0)
+[1.106s] -- Found OGRE: optimized;/usr/lib/x86_64-linux-gnu/libOgreMain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreMain.so
+[1.117s] -- Looking for OGRE_Paging...
+[1.117s] -- Found OGRE_Paging: optimized;/usr/lib/x86_64-linux-gnu/libOgrePaging.so;debug;/usr/lib/x86_64-linux-gnu/libOgrePaging.so
+[1.117s] -- Looking for OGRE_Terrain...
+[1.117s] -- Found OGRE_Terrain: optimized;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so;debug;/usr/lib/x86_64-linux-gnu/libOgreTerrain.so
+[1.118s] -- Looking for OGRE_Property...
+[1.118s] -- Found OGRE_Property: optimized;/usr/lib/x86_64-linux-gnu/libOgreProperty.so;debug;/usr/lib/x86_64-linux-gnu/libOgreProperty.so
+[1.118s] -- Looking for OGRE_RTShaderSystem...
+[1.118s] -- Found OGRE_RTShaderSystem: optimized;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so;debug;/usr/lib/x86_64-linux-gnu/libOgreRTShaderSystem.so
+[1.118s] -- Looking for OGRE_Volume...
+[1.118s] -- Found OGRE_Volume: optimized;/usr/lib/x86_64-linux-gnu/libOgreVolume.so;debug;/usr/lib/x86_64-linux-gnu/libOgreVolume.so
+[1.119s] -- Looking for OGRE_Overlay...
+[1.119s] -- Found OGRE_Overlay: optimized;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so;debug;/usr/lib/x86_64-linux-gnu/libOgreOverlay.so
+[1.205s] -- Looking for ignition-math6 -- found version 6.15.1
+[1.208s] -- Looking for ignition-transport8 -- found version 8.2.1
+[1.209s] -- Searching for dependencies of ignition-transport8
+[1.228s] -- Found Protobuf: /usr/lib/x86_64-linux-gnu/libprotobuf.so (found suitable version "3.12.4", minimum required is "3") 
+[1.239s] -- Config-file not installed for ZeroMQ -- checking for pkg-config
+[1.244s] -- Checking for module 'libzmq >= 4'
+[1.275s] --   Found libzmq , version 4.3.4
+[1.344s] -- Checking for module 'uuid'
+[1.362s] --   Found uuid, version 2.37.2
+[1.428s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[1.428s] -- Searching for dependencies of ignition-msgs5
+[1.446s] -- Looking for ignition-math6 -- found version 6.15.1
+[1.452s] -- Checking for module 'tinyxml2'
+[1.472s] --   Found tinyxml2, version 9.0.0
+[1.531s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[1.532s] -- Looking for ignition-common3 -- found version 3.14.0
+[1.533s] -- Searching for dependencies of ignition-common3
+[1.536s] -- Looking for dlfcn.h - found
+[1.536s] -- Looking for libdl - found
+[1.549s] -- Searching for <ignition-common3> component [graphics]
+[1.551s] -- Looking for ignition-common3-graphics -- found version 3.14.0
+[1.551s] -- Searching for dependencies of ignition-common3-graphics
+[1.552s] -- Looking for ignition-math6 -- found version 6.15.1
+[1.555s] -- Looking for ignition-fuel_tools4 -- found version 4.4.0
+[1.555s] -- Searching for dependencies of ignition-fuel_tools4
+[1.612s] -- Checking for module 'jsoncpp'
+[1.631s] --   Found jsoncpp, version 1.9.5
+[1.686s] -- Checking for module 'libzip'
+[1.714s] --   Found libzip, version 1.7.3
+[1.767s] -- Looking for ignition-common3 -- found version 3.14.0
+[1.768s] -- Looking for ignition-math6 -- found version 6.15.1
+[1.768s] -- Looking for ignition-msgs5 -- found version 5.8.1
+[1.775s] -- Gazebo version: 11.10
+[1.778s] -- Found ament_lint_auto: 0.12.11 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[1.916s] -- Added test 'flake8' to check Python code syntax and style conventions
+[1.918s] -- Added test 'lint_cmake' to check CMake code style
+[1.920s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[1.929s] -- Added test 'xmllint' to check XML markup files
+[1.933s] -- Configuring done
+[1.949s] -- Generating done
+[1.952s] -- Build files have been written to: /home/parth/Superbot_ws/build/superbot_description
+[1.983s] Invoked command in '/home/parth/Superbot_ws/build/superbot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/parth/Superbot_ws/build/superbot_description -- -j4 -l4
+[2.057s] Invoking command in '/home/parth/Superbot_ws/build/superbot_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/parth/Superbot_ws/build/superbot_description
+[2.065s] -- Install configuration: ""
+[2.065s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/launch
+[2.067s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/launch/superbot.launch.py
+[2.067s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/launch/gazebo_env.launch.py
+[2.067s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/launch/nav.launch.py
+[2.068s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/launch/gazebo_static.launch.py
+[2.068s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/URDF
+[2.068s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/URDF/superbot.sdf
+[2.068s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/URDF/superbot.urdf
+[2.068s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/URDF/superbot.urdf.xacro
+[2.068s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models
+[2.069s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfF_01
+[2.069s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfF_01/meshes
+[2.069s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfF_01/meshes/aws_robomaker_warehouse_ShelfF_01_collision.DAE
+[2.071s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfF_01/meshes/aws_robomaker_warehouse_ShelfF_01_visual.DAE
+[2.075s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfF_01/model.config
+[2.076s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfF_01/model.sdf
+[2.076s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfF_01/materials
+[2.076s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfF_01/materials/textures
+[2.077s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfF_01/materials/textures/aws_robomaker_warehouse_ShelfF_03.png
+[2.079s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfF_01/materials/textures/aws_robomaker_warehouse_ShelfF_01.png
+[2.080s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfF_01/materials/textures/aws_robomaker_warehouse_ShelfF_02.png
+[2.082s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_Lamp_01
+[2.082s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_Lamp_01/meshes
+[2.083s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_Lamp_01/meshes/aws_robomaker_warehouse_Lamp_01_visual.DAE
+[2.087s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_Lamp_01/meshes/aws_robomaker_warehouse_Lamp_01_collision.DAE
+[2.092s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_Lamp_01/model.config
+[2.097s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_Lamp_01/model.sdf
+[2.097s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_Lamp_01/materials
+[2.097s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_Lamp_01/materials/textures
+[2.097s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_Lamp_01/materials/textures/aws_robomaker_warehouse_Lamp_01.png
+[2.097s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfD_01
+[2.097s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfD_01/model.config
+[2.097s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfD_01/model.sdf
+[2.097s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfD_01/materials
+[2.097s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfD_01/materials/textures
+[2.097s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfD_01/materials/textures/aws_robomaker_warehouse_ShelfD_02.png
+[2.099s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfD_01/materials/textures/aws_robomaker_warehouse_ShelfD_03.png
+[2.106s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfD_01/materials/textures/aws_robomaker_warehouse_ShelfD_04.png
+[2.109s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfD_01/materials/textures/aws_robomaker_warehouse_ShelfD_01.png
+[2.111s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringA_01
+[2.111s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringA_01/meshes
+[2.112s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringA_01/meshes/aws_robomaker_warehouse_ClutteringA_01_visual.DAE
+[2.113s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringA_01/meshes/aws_robomaker_warehouse_ClutteringA_01_collision.DAE
+[2.115s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringA_01/model.config
+[2.115s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringA_01/model.sdf
+[2.115s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringA_01/materials
+[2.116s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringA_01/materials/textures
+[2.117s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringA_01/materials/textures/aws_robomaker_warehouse_ClutteringA_03.png
+[2.119s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringA_01/materials/textures/aws_robomaker_warehouse_ClutteringA_01.png
+[2.121s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringA_01/materials/textures/aws_robomaker_warehouse_ClutteringA_02.png
+[2.122s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_DeskC_01
+[2.123s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_DeskC_01/meshes
+[2.124s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_DeskC_01/meshes/aws_robomaker_warehouse_DeskC_01_collision.DAE
+[2.125s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_DeskC_01/meshes/aws_robomaker_warehouse_DeskC_01_visual.DAE
+[2.127s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_DeskC_01/model.config
+[2.127s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_DeskC_01/model.sdf
+[2.128s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_DeskC_01/materials
+[2.129s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_DeskC_01/materials/textures
+[2.129s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_DeskC_01/materials/textures/aws_robomaker_warehouse_DeskC_02.png
+[2.131s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_DeskC_01/materials/textures/aws_robomaker_warehouse_DeskC_04.png
+[2.132s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_DeskC_01/materials/textures/aws_robomaker_warehouse_DeskC_03.psd
+[2.139s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_DeskC_01/materials/textures/aws_robomaker_warehouse_DeskC_01.png
+[2.143s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_DeskC_01/materials/textures/aws_robomaker_warehouse_DeskC_03.png
+[2.144s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_GroundB_01
+[2.145s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_GroundB_01/meshes
+[2.146s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_GroundB_01/meshes/aws_robomaker_warehouse_GroundB_01_collision.DAE
+[2.147s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_GroundB_01/meshes/aws_robomaker_warehouse_GroundB_01_visual.DAE
+[2.147s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_GroundB_01/model.config
+[2.149s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_GroundB_01/model.sdf
+[2.149s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_GroundB_01/materials
+[2.150s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_GroundB_01/materials/textures
+[2.150s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_GroundB_01/materials/textures/aws_robomaker_warehouse_GroundB_02.png
+[2.152s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_GroundB_01/materials/textures/aws_robomaker_warehouse_GroundB_01.png
+[2.159s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringD_01
+[2.160s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringD_01/meshes
+[2.160s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringD_01/meshes/aws_robomaker_warehouse_ClutteringD_01_visual.DAE
+[2.161s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringD_01/meshes/aws_robomaker_warehouse_ClutteringD_01_collision.DAE
+[2.162s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringD_01/model.config
+[2.163s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringD_01/model.sdf
+[2.163s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringD_01/materials
+[2.164s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringD_01/materials/textures
+[2.165s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringD_01/materials/textures/aws_robomaker_warehouse_ClutteringD_02.png
+[2.167s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringD_01/materials/textures/aws_robomaker_warehouse_ClutteringD_01.png
+[2.168s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringC_01
+[2.169s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringC_01/meshes
+[2.169s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringC_01/meshes/aws_robomaker_warehouse_ClutteringC_01_visual.DAE
+[2.171s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringC_01/meshes/aws_robomaker_warehouse_ClutteringC_01_collision.DAE
+[2.175s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringC_01/model.config
+[2.184s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringC_01/model.sdf
+[2.189s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringC_01/materials
+[2.189s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringC_01/materials/textures
+[2.189s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringC_01/materials/textures/aws_robomaker_warehouse_ClutteringC_02.png
+[2.189s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ClutteringC_01/materials/textures/aws_robomaker_warehouse_ClutteringC_01.png
+[2.189s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_RoofB_01
+[2.189s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_RoofB_01/meshes
+[2.189s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_RoofB_01/meshes/aws_robomaker_warehouse_RoofB_01_visual.DAE
+[2.189s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_RoofB_01/meshes/aws_robomaker_warehouse_RoofB_01_collision.DAE
+[2.189s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_RoofB_01/model.config
+[2.190s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_RoofB_01/model.sdf
+[2.190s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_RoofB_01/materials
+[2.190s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_RoofB_01/materials/textures
+[2.190s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_RoofB_01/materials/textures/aws_robomaker_warehouse_RoofB_01.png
+[2.191s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_WallB_01
+[2.197s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_WallB_01/meshes
+[2.203s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_WallB_01/meshes/aws_robomaker_warehouse_WallB_01_collision.DAE
+[2.204s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_WallB_01/meshes/aws_robomaker_warehouse_WallB_01_visual.DAE
+[2.204s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_WallB_01/model.config
+[2.204s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_WallB_01/model.sdf
+[2.204s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_WallB_01/materials
+[2.204s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_WallB_01/materials/textures
+[2.205s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_WallB_01/materials/textures/aws_robomaker_warehouse_WallB_01.png
+[2.209s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfE_01
+[2.210s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfE_01/meshes
+[2.211s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfE_01/meshes/aws_robomaker_warehouse_ShelfE_01_visual.DAE
+[2.213s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfE_01/meshes/aws_robomaker_warehouse_ShelfE_01_collision.DAE
+[2.214s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfE_01/model.config
+[2.214s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfE_01/model.sdf
+[2.215s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfE_01/materials
+[2.216s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfE_01/materials/textures
+[2.217s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfE_01/materials/textures/aws_robomaker_warehouse_ShelfE_04.png
+[2.219s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfE_01/materials/textures/aws_robomaker_warehouse_ShelfE_02.png
+[2.221s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfE_01/materials/textures/aws_robomaker_warehouse_ShelfE_03.png
+[2.222s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_ShelfE_01/materials/textures/aws_robomaker_warehouse_ShelfE_01.png
+[2.223s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_TrashCanC_01
+[2.224s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_TrashCanC_01/meshes
+[2.225s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_TrashCanC_01/meshes/aws_robomaker_warehouse_TrashCanC_01_visual.DAE
+[2.227s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_TrashCanC_01/meshes/aws_robomaker_warehouse_TrashCanC_01_collision.DAE
+[2.227s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_TrashCanC_01/model.config
+[2.228s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_TrashCanC_01/model.sdf
+[2.229s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_TrashCanC_01/materials
+[2.229s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_TrashCanC_01/materials/textures
+[2.229s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_TrashCanC_01/materials/textures/aws_robomaker_warehouse_TrashCanC_01.png
+[2.231s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_PalletJackB_01
+[2.231s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_PalletJackB_01/meshes
+[2.232s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_PalletJackB_01/meshes/aws_robomaker_warehouse_PalletJackB_01_collision.DAE
+[2.233s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_PalletJackB_01/meshes/aws_robomaker_warehouse_PalletJackB_01_visual.DAE
+[2.237s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_PalletJackB_01/model.config
+[2.237s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_PalletJackB_01/model.sdf
+[2.238s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_PalletJackB_01/materials
+[2.238s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_PalletJackB_01/materials/textures
+[2.239s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_PalletJackB_01/materials/textures/aws_robomaker_warehouse_PalletJackB_02.png
+[2.240s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/models/aws_robomaker_warehouse_PalletJackB_01/materials/textures/aws_robomaker_warehouse_PalletJackB_01.png
+[2.243s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/worlds
+[2.244s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/worlds/superbot_env.world
+[2.244s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/worlds/safe_world.world
+[2.244s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/worlds/warehouse.world
+[2.244s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/worlds/superbot_static_env.world
+[2.244s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/rviz
+[2.244s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/rviz/navigation.rviz
+[2.245s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/config
+[2.245s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/config/nav2_params.yaml
+[2.245s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/config/slam_config.yaml
+[2.245s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/ament_index/resource_index/package_run_dependencies/superbot_description
+[2.246s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/ament_index/resource_index/parent_prefix_path/superbot_description
+[2.246s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/environment/ament_prefix_path.sh
+[2.246s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/environment/ament_prefix_path.dsv
+[2.246s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/environment/path.sh
+[2.247s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/environment/path.dsv
+[2.247s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/local_setup.bash
+[2.247s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/local_setup.sh
+[2.247s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/local_setup.zsh
+[2.247s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/local_setup.dsv
+[2.247s] -- Installing: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/package.dsv
+[2.247s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/ament_index/resource_index/packages/superbot_description
+[2.247s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/cmake/superbot_descriptionConfig.cmake
+[2.247s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/cmake/superbot_descriptionConfig-version.cmake
+[2.248s] -- Up-to-date: /home/parth/Superbot_ws/install/superbot_description/share/superbot_description/package.xml
+[2.250s] Invoked command in '/home/parth/Superbot_ws/build/superbot_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/parth/Superbot_ws/build/superbot_description
