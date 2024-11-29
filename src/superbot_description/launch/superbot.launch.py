@@ -1,86 +1,103 @@
+import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
-import os
+import xacro
 
 def generate_launch_description():
-    # Define the package and file paths
-    package_name = 'superbot_description'  # Replace with your package name
-    urdf_file = 'superbot.urdf'  # Replace with your URDF filename
-    urdf_path = os.path.join(
-        get_package_share_directory(package_name), 
-        'URDF',  # Ensure folder name matches (case-sensitive)
-        urdf_file
-    )
+    robot_xacro = "superbot"
+    package = "superbot_description"
 
-    # Gazebo launch file
+    robot_path = "URDF/superbot.urdf.xacro"
+    world_path = "worlds/superbot_env.world"
+
+    # Get paths
+    robot_path_file = os.path.join(get_package_share_directory(package), robot_path)
+    world_path_file = os.path.join(get_package_share_directory(package), world_path)
+
+    # Process XACRO to URDF
+    try:
+        robot_description = xacro.process_file(robot_path_file).toxml()
+    except Exception as e:
+        print(f"Error processing XACRO file: {e}")
+        raise RuntimeError(f"Failed to process XACRO: {robot_path_file}")
+
+    # Save the processed URDF for debugging
+    with open('/tmp/superbot_processed.urdf', 'w') as f:
+        f.write(robot_description)
+    print("Processed URDF saved to /tmp/superbot_processed.urdf")
+
+    # Gazebo launch
+    gazebo_ros_launch = PythonLaunchDescriptionSource(
+        os.path.join(get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')
+    )
     gazebo_launch = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(
-                get_package_share_directory('gazebo_ros'), 
-                'launch', 
-                'gazebo.launch.py'
-            )
-        ),
-        launch_arguments={
-            'use_sim_time': 'true',
-            'pause': 'false',
-        }.items()
+        gazebo_ros_launch,
+        launch_arguments={'world': world_path_file}.items()
     )
 
-    # Spawn the robot model in Gazebo
-    spawn_robot_node = Node(
+    # Spawn model in Gazebo
+    spawn_model_node = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
-        arguments=['-entity', 'superbot', '-file', urdf_path],
+        arguments=['-topic', '/robot_description', '-entity', robot_xacro],
         output='screen'
     )
 
-    # Robot State Publisher (publishes TF and robot description)
+    # Robot State Publisher
     robot_state_publisher_node = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
-        parameters=[{'robot_description': open(urdf_path).read()}],
-        output='screen'
+        output='screen',
+        parameters=[{
+            'robot_description': robot_description,
+            'use_sim_time': True
+        }]
     )
 
-    # RViz visualization
-    rviz_config_file = os.path.join(
-        get_package_share_directory(package_name), 
-        'rviz', 
-        'superbot_config.rviz'
+    slam_node = Node(
+        package='slam_toolbox',
+        executable='async_slam_toolbox_node',
+        name='slam_toolbox',
+        output='screen',
+        parameters=[{
+            'use_sim_time': True,
+            'map_frame': 'map',
+            'odom_frame': 'odom',
+            'base_frame': 'base_link',
+        }]
     )
 
-    rviz_node = Node(
-        package='rviz2',
-        executable='rviz2',
-        arguments=['-d', rviz_config_file],
+
+    # Teleop for controlling the robot
+    teleop_node = Node(
+        package='teleop_twist_keyboard',
+        executable='teleop_twist_keyboard',
+        name='teleop_twist_keyboard',
         output='screen',
         parameters=[{'use_sim_time': True}]
     )
 
-    static_transform_left_wheel = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        name='base_link_to_left_wheel_tf',
-        arguments=['-0.15', '0.225', '0', '0', '0', '0', 'base_link', 'left_wheel']
-    )
+    rviz_node = Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz',
+            output='screen',
+            arguments=['-d', os.path.join(get_package_share_directory(package), 'rviz', 'robot_display.rviz')],
+            remappings=[('/scan', '/scan'),
+                        ('/odom', '/odom'),
+                        ('/map', '/map')]
+        )
 
-    static_transform_right_wheel = Node(
-        package='tf2_ros',
-        executable='static_transform_publisher',
-        name='base_link_to_right_wheel_tf',
-        arguments=['-0.15', '-0.225', '0', '0', '0', '0', 'base_link', 'right_wheel']
-    )
+    # Launch Description
+    ld = LaunchDescription()
+    ld.add_action(gazebo_launch)
+    ld.add_action(spawn_model_node)
+    ld.add_action(robot_state_publisher_node)
+    ld.add_action(slam_node)  # Add the SLAM node
+    ld.add_action(teleop_node)  # Add the Teleop node
+    ld.add_action(rviz_node)
 
-    # Launch description
-    return LaunchDescription([
-        gazebo_launch,
-        spawn_robot_node,
-        robot_state_publisher_node,
-        rviz_node,
-        static_transform_left_wheel,
-        static_transform_right_wheel
-    ])
+    return ld
