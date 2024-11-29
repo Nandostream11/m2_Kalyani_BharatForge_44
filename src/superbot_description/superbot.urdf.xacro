@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<robot name="superbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <!-- Body dimensions -->
+    <xacro:property name="body_x" value="1"/>
+    <xacro:property name="body_y" value="0.6"/>
+    <xacro:property name="body_z" value="0.3"/>
+
+    <!-- Wheel dimensions and locations -->
+    <xacro:property name="wheel_r" value="0.15"/>
+    <xacro:property name="wheel_l" value="0.1"/>
+    <xacro:property name="wheel_z" value="-0.1"/>
+
+    <!-- Castor wheel dimensions and locations -->
+    <xacro:property name="castor_r" value="0.15"/>
+    <xacro:property name="castor_z" value="-0.1"/>
+
+    <!-- Material density -->
+    <xacro:property name="body_density" value="2710.0"/>
+    <xacro:property name="wheel_density" value="2710.0"/>
+    <xacro:property name="castor_density" value="2710.0"/>
+
+    <!-- Pi Value -->
+    <xacro:property name="pi" value="3.14159265"/>
+
+    <!-- Mass property -->
+    <xacro:property name="body_mass" value="${body_density * body_x * body_y * body_z}"/>
+    <xacro:property name="wheel_mass" value="${wheel_density * pi * wheel_r * wheel_r * wheel_l}"/>
+    <xacro:property name="castor_mass" value="${castor_density * (4.0 / 3.0) * pi * castor_r * castor_r * castor_r}"/>
+
+    <!-- Moment of Inertia Wheel -->
+    <xacro:property name="Iz_wheel" value="${0.5 * wheel_mass * wheel_r * wheel_r}"/>
+    <xacro:property name="I_wheel" value="${(1.0 / 12.0) * wheel_mass * (3.0 * wheel_r * wheel_r + wheel_l * wheel_l)}"/>
+
+    <!-- Moment of Inertia Castor Wheel -->
+    <xacro:property name="I_castor" value="${(2.0 / 5.0) * castor_mass * castor_r * castor_r}"/>
+
+    <!-- Inertial macro for wheel -->
+    <xacro:macro name="inertia_wheel">
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <mass value="${wheel_mass}"/>
+            <inertia ixx="${I_wheel}" ixy="0.0" ixz="0.0" iyy="${I_wheel}" iyz="0.0" izz="${Iz_wheel}"/>
+        </inertial>
+    </xacro:macro>
+
+    <!-- Inertial macro for castor wheel -->
+    <xacro:macro name="inertia_castor">
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <mass value="${castor_mass}"/>
+            <inertia ixx="${I_castor}" ixy="0.0" ixz="0.0" iyy="${I_castor}" iyz="0.0" izz="${I_castor}"/>
+        </inertial>
+    </xacro:macro>
+
+    <!-- Gazebo Plugin Include -->
+    <xacro:include filename="$(find superbot_description)/URDF/superbot.gazebo.xacro"/>
+
+    <!-- Define Lidar Properties -->
+    <xacro:property name="lidar_radius" value="0.1"/>
+    <xacro:property name="lidar_length" value="0.3"/>
+    <xacro:property name="lidar_z" value="0.25"/>
+
+    <!-- Dummy Link and Joint -->
+    <link name="dummy"/>
+    <joint name="dummy_joint" type="fixed">
+        <parent link="dummy"/>
+        <child link="base_link"/>
+    </joint>
+
+    <!-- Base Link -->
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <box size="${body_x} ${body_y} ${body_z}"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="${body_x} ${body_y} ${body_z}"/>
+            </geometry>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+        </collision>
+        <inertial>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <mass value="${body_mass}"/>
+            <inertia ixx="${(1 / 12) * body_mass * (body_y * body_y + body_z * body_z)}" 
+                     ixy="0" 
+                     ixz="0" 
+                     iyy="${(1 / 12) * body_mass * (body_x * body_x + body_z * body_z)}" 
+                     iyz="0" 
+                     izz="${(1 / 12) * body_mass * (body_x * body_x + body_y * body_y)}"/>
+        </inertial>
+    </link>
+
+    <!-- Wheel Joints and Links -->
+    <!-- Right Wheel -->
+    <joint name="right_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="right_wheel"/>
+        <origin xyz="${-2 * wheel_r} ${-body_y / 2 - wheel_l / 2} ${wheel_z}" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="right_wheel">
+        <visual>
+            <origin rpy="1.57 0 0" xyz="0 0 0"/>
+            <geometry>
+                <cylinder length="${wheel_l}" radius="${wheel_r}"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin rpy="1.57 0 0" xyz="0 0 0"/>
+            <geometry>
+                <cylinder length="${wheel_l}" radius="${wheel_r}"/>
+            </geometry>
+        </collision>
+        <xacro:inertia_wheel/>
+    </link>
+
+    <!-- Left Wheel -->
+    <joint name="left_joint" type="continuous">
+        <parent link="base_link"/>
+        <child link="left_wheel"/>
+        <origin xyz="${-2 * wheel_r} ${body_y / 2 + wheel_l / 2} ${wheel_z}" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
+    </joint>
+
+    <link name="left_wheel">
+        <visual>
+            <origin rpy="1.57 0 0" xyz="0 0 0"/>
+            <geometry>
+                <cylinder length="${wheel_l}" radius="${wheel_r}"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin rpy="1.57 0 0" xyz="0 0 0"/>
+            <geometry>
+                <cylinder length="${wheel_l}" radius="${wheel_r}"/>
+            </geometry>
+        </collision>
+        <xacro:inertia_wheel/>
+    </link>
+
+    <!-- Castor Wheel -->
+    <joint name="castor_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="castor_wheel"/>
+        <origin xyz="${2 * castor_r} 0 ${castor_z}" rpy="0 0 0"/>
+    </joint>
+
+    <link name="castor_wheel">
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <sphere radius="${castor_r}"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0"/>
+            <geometry>
+                <sphere radius="${castor_r}"/>
+            </geometry>
+        </collision>
+        <xacro:inertia_castor/>
+    </link>
+
+    <!-- Lidar -->
+    <link name="lidar">
+        <visual>
+            <origin xyz="0 0 ${lidar_z}" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="${lidar_radius}" length="${lidar_length}"/>
+            </geometry>
+            <material name="red"/>
+        </visual>
+        <collision>
+            <origin xyz="0 0 ${lidar_z}" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="${lidar_radius}" length="${lidar_length}"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="lidar_joint" type="fixed">
+        <parent link="base_link"/>
+        <child link="lidar"/>
+        <origin xyz="0 0 ${lidar_z}" rpy="0 0 0"/>
+    </joint>
+
+</robot>
