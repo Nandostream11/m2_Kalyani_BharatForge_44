@@ -6,9 +6,9 @@ A ROS2-based package for autonomous robot navigation. This package utilizes the 
 
 ## Installation
 
-git clone https://github.com/username/autonomous_navigation_pkg.git.<br>
+git clone https://github.com/Vedhamshbode/Superbot_ws.git.<br>
 ```bash 
-cd superbot_descrioption
+cd Superbot_ws/
 rosdep install --from-paths src --ignore-src -r -y
 colcon build --packages-select superbot_description
 source install/setup.bash
@@ -19,7 +19,7 @@ Map Generation
 
 ## Launch SLAM for map generation
 ```bash
-ros2 launch superbot_description sim_launch.py
+ros2 launch superbot_description superbot.launch.py
 ```
 
 Autonomous Navigation
@@ -38,5 +38,12 @@ Localization using AMCL
 Path planning and obstacle avoidance
 
 Integration with RViz for visualization
+
+Dynamic map creation and updates through data logging
+
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 
