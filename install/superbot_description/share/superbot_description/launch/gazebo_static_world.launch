@@ -1,8 +1,0 @@
-<launch>
-    <!-- Launch Gazebo with a specific world -->
-    <arg name="world_file" default="$(find your_package_name)/worlds/superbot_static_env.world" />
-
-    <node name="gazebo" pkg="gazebo_ros" type="gzserver" args="-s libgazebo_ros_factory.so $(arg world_file)" respawn="false" output="screen" />
-
-    <node name="gazebo_client" pkg="gazebo_ros" type="gzclient" respawn="false" output="screen" />
-</launch>

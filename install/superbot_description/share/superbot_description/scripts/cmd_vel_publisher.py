@@ -1,1 +1,0 @@
-/home/parth/Superbot_ws/src/superbot_description/scripts/cmd_vel_publisher.py
