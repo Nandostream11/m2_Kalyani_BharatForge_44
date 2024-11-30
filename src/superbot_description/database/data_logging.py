@@ -1,13 +1,13 @@
 from pymongo import MongoClient
 from datetime import datetime, timezone
 
-def log_robot_data(db, robot_id, location, obstacles, tasks_completed):
+def log_robot_data(db, robot_id, location_x, location_y, obstacles, tasks_done):
     db.robot_logs.insert_one({
-        "robot_id": robot_id,
         "timestamp": datetime.now(timezone.utc),
-        "location": location,
+        "robot_id": robot_id,
+        "X": location_x, "Y": location_y,
         "obstacles": obstacles,
-        "tasks_completed": tasks_completed
+        "tasks_done": tasks_done
     })
 
 def log_dynamic_map(db, environment_id, map_data):
