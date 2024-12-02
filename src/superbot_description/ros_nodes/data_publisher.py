@@ -16,6 +16,7 @@ class DataPublisher(Node):
             "robot_id": "R1",               #{R1, R2, R3, R4}
             "location_x": 5, "location_y": 2,    #[(x,y): [(0.0),(10,10)]]
             "obstacles": ["wall"],          #["wall", "table", "human", ...]
+            "confidence_score": 0.91,          #[0.6, 0.1, 0.2, ...,
             "tasks_done": 5                 #[0, 1, 2, 3, 4, 5]
         }
         self.publisher.publish(String(data=json.dumps(robot_data)))

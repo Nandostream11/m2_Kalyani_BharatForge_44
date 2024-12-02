@@ -33,7 +33,7 @@ class RobotListener(Node):
 
     def listener_callback(self, msg):
         robot_data = json.loads(msg.data)
-        log_robot_data(self.db, robot_data['robot_id'], robot_data['location_x'], robot_data['location_y'], robot_data['obstacles'], robot_data['tasks_done'])
+        log_robot_data(self.db, robot_data['robot_id'], robot_data['location_x'], robot_data['location_y'], robot_data['obstacles'], robot_data['confidence_score'], robot_data['tasks_done'])
         print("Logged robot data")
 
     def map_listener_callback(self, msg):
