@@ -6,11 +6,11 @@ from nav_msgs.msg import OccupancyGrid, Odometry
 from geometry_msgs.msg import Twist
 from cv_bridge import CvBridge
 from ultralytics import YOLO
+from std_msgs.msg import String
 import math
 import random
 import cv2
 import json
-from std_msgs.msg import String  # Import String for publishing robot data
 
 class MappingAndDetectionNode(Node):
     def __init__(self):
@@ -47,51 +47,47 @@ class MappingAndDetectionNode(Node):
         
         # Subscribers for multiple robots
         self.robot_data = {}  # Dictionary to hold data for each robot
-
+        self.latest_scan = None
+        self.current_odom = None
+        self.local_map = None
+        self.latest_image = None
+        
         for robot_id in range(1, 5):  # Assuming robot IDs are 1 to 4
             self.create_subscription(
-                LaserScan, f'/robot{robot_id}/scan', self.create_scan_callback(robot_id), self.qos_profile
+                LaserScan, f'/R{robot_id}/scan', self.create_scan_callback(robot_id), self.qos_profile
             )
             self.create_subscription(
-                Odometry, f'/robot{robot_id}/odom', self.create_odom_callback(robot_id), self.qos_profile
+                Odometry, f'/R{robot_id}/odom', self.create_odom_callback(robot_id), self.qos_profile
             )
             self.create_subscription(
-                Image, f'/robot{robot_id}/camera/image_raw', self.create_image_callback(robot_id), 10
+                Image, f'/R{robot_id}/camera/image_raw', self.create_image_callback(robot_id), 10
             )
             self.create_subscription(
-                CameraInfo, f'/robot{robot_id}/camera/camera_info', self.create_camera_info_callback(robot_id), 10
+                CameraInfo, f'/R{robot_id}/camera/camera_info', self.create_camera_info_callback(robot_id), 10
             )
         
         # Publishers
         self.cmd_vel_pub = self.create_publisher(
             Twist, '/diff_cont/cmd_vel_unstamped', self.qos_profile
         )
-        
         self.global_map_pub = self.create_publisher(
             OccupancyGrid, '/global_map', self.qos_profile
         )
-        
         self.local_map_pub = self.create_publisher(
             OccupancyGrid, '/local_map', self.qos_profile
         )
-        
-        # Detections Publisher (Optional)
         self.detections_pub = self.create_publisher(
             Image, '/detected_objects', self.qos_profile
         )
-        
-        # New Publisher for Robot Data
         self.robot_data_pub = self.create_publisher(String, 'robot_data', self.qos_profile)
 
         # Timers
         self.map_timer = self.create_timer(1.0, self.publish_maps)
-        self.robot_data_timer = self.create_timer(1.0, self.publish_robot_data)  # Timer to publish robot data
+        self.robot_data_timer = self.create_timer(1.0, self.publish_robot_data)
         self.timer = self.create_timer(0.1, self.timer_callback)
         
         # Exploration state
         self.target_angle = 0.0
-        
-        # Initial map generation
         self.global_map = self.generate_map()
         
         self.get_logger().info('Mapping and Detection Node Initialized')
@@ -100,26 +96,28 @@ class MappingAndDetectionNode(Node):
         """Generate a sample occupancy grid map"""
         map_msg = OccupancyGrid()
         map_msg.header.frame_id = 'map'
-        
         map_msg.info.resolution = self.resolution
         map_msg.info.width = int(self.grid_size / self.resolution)
         map_msg.info.height = int(self.grid_size / self.resolution)
-        
         map_msg.info.origin.position.x = -self.grid_size / 2
         map_msg.info.origin.position.y = -self.grid_size / 2
         map_msg.info.origin.position.z = 0.0
         
         map_size = map_msg.info.width * map_msg.info.height
-        
-        '''python'''
-        map_data = []
-        for _ in range(map_size):
-            cell_value = -1 if random.random() < 0.9 else random.randint(50, 100)
-            map_data.append(cell_value)
-        
+        map_data = [-1 if random.random() < 0.9 else random.randint(50, 100) for _ in range(map_size)]
         map_msg.data = map_data
-        
         return map_msg
+    
+    def publish_maps(self):
+        """Publish global and local maps"""
+        now = self.get_clock().now().to_msg()
+        self.global_map.header.stamp = now
+        self.global_map_pub.publish(self.global_map)
+        
+        if self.local_map is None:
+            self.local_map = self.generate_map()
+        self.local_map.header.stamp = now
+        self.local_map_pub.publish(self.local_map)
     
     def create_scan_callback(self, robot_id):
         """Create a callback for LIDAR data for a specific robot"""
@@ -154,34 +152,23 @@ class MappingAndDetectionNode(Node):
             self.robot_data.setdefault(robot_id, {})['camera_info'] = msg
         return camera_info_callback
     
-    def publish_maps(self):
-        """Publish global and local maps"""
-        now = self.get_clock().now().to_msg()
-        
-        global_map = self.global_map
-        global_map.header.stamp = now
-        self.global_map_pub.publish(global_map)
-        
-        # Local map publishing logic can be added here if needed
-    
     def publish_robot_data(self):
         """Publish computed robot data for all robots"""
         for robot_id, data in self.robot_data.items():
             if 'latest_scan' in data and 'current_odom' in data:
                 latest_scan = data['latest_scan']
                 current_odom = data['current_odom']
-                
                 robot_data = {
                     "robot_id": f"R{robot_id}",
                     "location_x": current_odom.pose.pose.position.x,
                     "location_y": current_odom.pose.pose.position.y,
                     "obstacles_detected": self.check_obstacles(latest_scan),
                     "scan_ranges": latest_scan.ranges,
-                    "camera_info": data.get('camera_info', None)  # Include camera info if available
+                    "camera_info": data.get('camera_info', None)     # Include camera info if available
                 }
                 self.robot_data_pub.publish(String(data=json.dumps(robot_data)))
                 self.get_logger().info(f'Publishing robot data: {robot_data}')
-    
+
     def check_obstacles(self, latest_scan):
         """Check for obstacles in the LiDAR scan"""
         if latest_scan is None:
@@ -190,31 +177,19 @@ class MappingAndDetectionNode(Node):
         angle_min = latest_scan.angle_min
         angle_increment = latest_scan.angle_increment
         ranges = latest_scan.ranges
-        
-        min_angle = math.radians(-45)
-        max_angle = math.radians(45)
-        
-        start_index = max(0, int((min_angle - angle_min) / angle_increment))
-        end_index = min(len(ranges), int((max_angle - angle_min) / angle_increment))
-        
+        min_angle, max_angle = math.radians(-45), math.radians(45)
+        start_idx = max(0, int((min_angle - angle_min) / angle_increment))
+        end_idx = min(len(ranges), int((max_angle - angle_min) / angle_increment))
         valid_ranges = [
-            r for r in ranges[start_index:end_index] 
-            if latest_scan.range_min < r < latest_scan.range_max 
-            and not math.isinf(r) and not math.isnan(r)
+            r for r in ranges[start_idx:end_idx]
+            if latest_scan.range_min < r < latest_scan.range_max and not math.isinf(r) and not math.isnan(r)
         ]
-        
-        if not valid_ranges:
-            return True
-        
-        min_distance = min(valid_ranges)
-        
-        return min_distance <= 1.0
+        return min(valid_ranges, default=float('inf')) <= 1.0
     
     def timer_callback(self):
         """Main exploration logic callback"""
         if not all(robot_id in self.robot_data for robot_id in range(1, 5)):
             return  # Wait until we have data from all robots
-
         for robot_id in range(1, 5):
             data = self.robot_data[robot_id]
             if 'latest_scan' in data and 'current_odom' in data:
@@ -222,22 +197,19 @@ class MappingAndDetectionNode(Node):
                 current_odom = data['current_odom']
 
                 twist = Twist()
-
                 if self.check_obstacles(latest_scan):
-                    twist.angular.z = 0.5  # Rotate if obstacles are detected
-                    self.adjust_exploration_angle()  # Adjust the exploration angle
+                    twist.angular.z = 0.5               # Rotate if obstacles detected
+                    self.adjust_exploration_angle()     # Adjust the exploration angle
                 else:
-                    twist.linear.x = self.max_speed  # Move forward if no obstacles
-                    
+                    twist.linear.x = self.max_speed     # Move forward if no obstacles
                     if random.random() < 0.1:
                         self.adjust_exploration_angle()  # Randomly adjust the exploration angle
-
+                    
                 current_yaw = self.get_current_yaw(robot_id)
                 angle_diff = self.angle_difference(current_yaw, self.target_angle)
+                twist.angular.z += 0.5 * angle_diff     # Adjust the angular velocity based on the angle difference
 
-                twist.angular.z += 0.5 * angle_diff  # Adjust the angular velocity based on the angle difference
-
-                self.cmd_vel_pub.publish(twist)  # Publish the velocity command for the current robot
+                self.cmd_vel_pub.publish(twist)         # Publish the velocity command
 
     def get_current_yaw(self, robot_id):
         """Extract current yaw from odometry for a specific robot"""
@@ -267,7 +239,6 @@ class MappingAndDetectionNode(Node):
 def main(args=None):
     rclpy.init(args=args)
     node = MappingAndDetectionNode()
-    
     try:
         rclpy.spin(node)
     except KeyboardInterrupt:
