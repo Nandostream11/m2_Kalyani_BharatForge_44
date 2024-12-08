@@ -1,13 +1,14 @@
 from pymongo import MongoClient
 from datetime import datetime, timezone
 
-def log_robot_data(db, robot_id, location_x, location_y, obstacles, confidence_score, tasks_done):
+def log_robot_data(db, robot_id, location_x, location_y, obstacles, confidence_score, scan_ranges, tasks_done):
     db.robot_logs.insert_one({
         "timestamp": datetime.now(timezone.utc),
         "robot_id": robot_id,
         "X": location_x, "Y": location_y,
         "obstacles": obstacles,
         "confidence_score": confidence_score,
+        "scan_ranges": scan_ranges,
         "tasks_done": tasks_done
     })
 

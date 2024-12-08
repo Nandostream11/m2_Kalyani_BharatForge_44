@@ -22,7 +22,9 @@ setup(
     entry_points={
         'console_scripts': [
             'robot_listener = superbot_description.ros_nodes.robot_listener:main',
-            'data_publisher = superbot_description.ros_nodes.data_publisher:main',
+            'robot_swarm_comms = superbot_description.ros_nodes.robot_swarm_comms:main',
+            # 'data_publisher = superbot_description.ros_nodes.data_publisher:main',
+            'dynamic_mapper = superbot_description.launch.dynamic_mapper:main',
         ],
     },
 )
