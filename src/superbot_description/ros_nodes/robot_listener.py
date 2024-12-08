@@ -8,9 +8,8 @@ import sys
 import os
 import math
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from database.data_logging import log_robot_data
+from database.data_logging import log_robot_data, update_dynamic_map
 from database.mongo_setup import connect_to_db
-from database.dynamic_map import update_dynamic_map
 
 class RobotListener(Node):
     def __init__(self):
