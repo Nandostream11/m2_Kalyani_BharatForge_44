@@ -8,7 +8,7 @@ A ROS2-based package for autonomous robot navigation. This package utilizes the 
 
 git clone https://github.com/Nandostream11/m2_Kalyani_BharatForge_44.git.<br>
 ```bash 
-cd Superbot_ws/
+cd m2_Kalyani_BharatForge_44/
 rosdep install --from-paths src --ignore-src -r -y
 colcon build --packages-select superbot_description
 source install/setup.bash
